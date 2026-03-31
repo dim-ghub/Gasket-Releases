@@ -1,13 +1,9 @@
 name: Release to GitHub
 
 on:
-  repository_dispatch:
-    types: [gasket-release]
-  workflow_dispatch:
-    inputs:
-      version:
-        description: 'Version tag'
-        required: true
+  push:
+    tags:
+      - 'v*'
 
 jobs:
   release:
