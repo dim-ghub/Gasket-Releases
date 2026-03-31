@@ -3,50 +3,279 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gasket Releases</title>
+    <title>Gasket - Steam Deck Key Injector</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Crimson+Text:ital,wght@0,400;0,700;1,400&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-family: 'Crimson Text', Georgia, serif;
+            min-height: 100vh;
+            background: 
+                linear-gradient(180deg, #1a1408 0%, #0d0a04 100%);
+            color: #c9a227;
+            overflow-x: hidden;
+        }
+        
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23000' fill-opacity='0.15'%3E%3Cpath d='M30 0c1 10 5 15 15 15-10 0-14 5-15 15-1-10-5-15-15-15 10 0 14-5 15-15z'/%3E%3C/g%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        .gear {
+            position: fixed;
+            opacity: 0.1;
+            z-index: -1;
+        }
+        
+        .gear-1 {
+            top: 10%;
+            left: 5%;
+            width: 200px;
+            animation: rotate 20s linear infinite;
+        }
+        
+        .gear-2 {
+            bottom: 15%;
+            right: 8%;
+            width: 150px;
+            animation: rotate 15s linear infinite reverse;
+        }
+        
+        .gear-3 {
+            top: 50%;
+            left: 2%;
+            width: 80px;
+            animation: rotate 25s linear infinite;
+        }
+        
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        .container {
             max-width: 800px;
-            margin: 50px auto;
-            padding: 20px;
-            background: #1a1a2e;
-            color: #eee;
+            margin: 0 auto;
+            padding: 40px 20px;
         }
-        h1 { color: #fff; }
-        .release {
-            background: #16213e;
-            padding: 20px;
-            margin: 10px 0;
+        
+        header {
+            text-align: center;
+            margin-bottom: 50px;
+            border-bottom: 3px solid #8b5a2b;
+            padding-bottom: 30px;
+            position: relative;
+        }
+        
+        header::before,
+        header::after {
+            content: '⚙';
+            font-size: 40px;
+            position: absolute;
+            top: 20px;
+            color: #8b5a2b;
+        }
+        
+        header::before { left: 20px; }
+        header::after { right: 20px; }
+        
+        h1 {
+            font-family: 'Cinzel', serif;
+            font-size: 3.5rem;
+            color: #d4af37;
+            text-shadow: 
+                2px 2px 0 #000,
+                0 0 20px rgba(212, 175, 55, 0.3);
+            letter-spacing: 8px;
+            margin-bottom: 10px;
+        }
+        
+        .tagline {
+            font-style: italic;
+            color: #8b6914;
+            font-size: 1.2rem;
+            letter-spacing: 2px;
+        }
+        
+        .rivets {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+        
+        .rivet {
+            width: 12px;
+            height: 12px;
+            background: radial-gradient(circle at 30% 30%, #d4af37, #8b5a2b);
+            border-radius: 50%;
+            box-shadow: 
+                inset -2px -2px 4px rgba(0,0,0,0.5),
+                0 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .subtitle {
+            font-size: 1.1rem;
+            color: #a67c00;
+            margin-top: 20px;
+        }
+        
+        #releases {
+            background: linear-gradient(180deg, #2a1f0f 0%, #1a1408 100%);
+            border: 3px solid #8b5a2b;
             border-radius: 8px;
+            padding: 30px;
+            box-shadow: 
+                inset 0 0 30px rgba(0,0,0,0.5),
+                0 0 20px rgba(139, 90, 43, 0.3);
+            position: relative;
         }
+        
+        #releases::before {
+            content: '';
+            position: absolute;
+            top: -1px;
+            left: 20px;
+            right: 20px;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #d4af37, transparent);
+        }
+        
+        .release {
+            background: linear-gradient(135deg, #1f1509 0%, #151008 100%);
+            border: 2px solid #5c3d1e;
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .release:hover {
+            border-color: #d4af37;
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.2);
+            transform: translateX(5px);
+        }
+        
         .release a {
-            color: #4cc9f0;
-            font-size: 18px;
+            display: inline-block;
+            font-family: 'Cinzel', serif;
+            font-size: 1.4rem;
+            color: #d4af37;
             text-decoration: none;
+            padding: 10px 20px;
+            border: 2px solid #8b5a2b;
+            background: linear-gradient(180deg, #3d2817 0%, #2a1c0f 100%);
+            border-radius: 4px;
+            transition: all 0.3s ease;
         }
-        .release a:hover { text-decoration: underline; }
-        .date { color: #888; font-size: 14px; }
+        
+        .release a:hover {
+            background: linear-gradient(180deg, #8b5a2b 0%, #5c3d1e 100%);
+            color: #fff;
+            text-shadow: 0 0 10px rgba(255,255,255,0.5);
+        }
+        
+        .date {
+            display: block;
+            margin-top: 10px;
+            color: #6b4c1e;
+            font-size: 0.9rem;
+        }
+        
+        .branding {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            border-top: 2px solid #5c3d1e;
+            color: #5c3d1e;
+            font-size: 0.9rem;
+        }
+        
+        .branding span {
+            color: #8b5a2b;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 30px;
+            color: #5c3d1e;
+            font-size: 0.8rem;
+        }
     </style>
 </head>
 <body>
-    <h1>Gasket Releases</h1>
-    <p>GTK4 application for searching Steam games and injecting depot keys.</p>
-    <div id="releases"></div>
+    <svg class="gear gear-1" viewBox="0 0 100 100">
+        <path fill="currentColor" d="M50 0c2 8 6 12 12 12-6 0-10 4-12 12-2-8-6-12-12-12 6 0 10-4 12-12zM50 25c3 6 6 9 9 9-3 0-6 3-9 9-3-6-6-9-9-9 3 0 6-3 9-9zM25 50c0 6 4 10 12 12-2-8-4-12-4-12-6 0-10 4-12 12 0-6 4-10 4-12zM50 75c-3 0-6 3-9 9-3-6-6-9-9-9 3 0 6-3 9-9 3 6 6 9 9 9z"/>
+    </svg>
+    <svg class="gear gear-2" viewBox="0 0 100 100">
+        <path fill="currentColor" d="M50 0c2 8 6 12 12 12-6 0-10 4-12 12-2-8-6-12-12-12 6 0 10-4 12-12zM50 25c3 6 6 9 9 9-3 0-6 3-9 9-3-6-6-9-9-9 3 0 6-3 9-9zM25 50c0 6 4 10 12 12-2-8-4-12-4-12-6 0-10 4-12 12 0-6 4-10 4-12zM50 75c-3 0-6 3-9 9-3-6-6-9-9-9 3 0 6-3 9-9 3 6 6 9 9 9z"/>
+    </svg>
+    <svg class="gear gear-3" viewBox="0 0 100 100">
+        <path fill="currentColor" d="M50 0c2 8 6 12 12 12-6 0-10 4-12 12-2-8-6-12-12-12 6 0 10-4 12-12zM50 25c3 6 6 9 9 9-3 0-6 3-9 9-3-6-6-9-9-9 3 0 6-3 9-9zM25 50c0 6 4 10 12 12-2-8-4-12-4-12-6 0-10 4-12 12 0-6 4-10 4-12zM50 75c-3 0-6 3-9 9-3-6-6-9-9-9 3 0 6-3 9-9 3 6 6 9 9 9z"/>
+    </svg>
+    
+    <div class="container">
+        <header>
+            <h1>GASKET</h1>
+            <p class="tagline">Steam Deck Key Injection Apparatus</p>
+            <div class="rivets">
+                <div class="rivet"></div>
+                <div class="rivet"></div>
+                <div class="rivet"></div>
+                <div class="rivet"></div>
+                <div class="rivet"></div>
+            </div>
+            <p class="subtitle">Automated depot key management for Steam games</p>
+        </header>
+        
+        <div id="releases">
+            <p style="text-align: center; color: #5c3d1e;">Loading releases...</p>
+        </div>
+        
+        <div class="branding">
+            Crafted with <span>⚙</span> steam and determination
+        </div>
+        
+        <footer>
+            © 2026 Gasket Engineering Co.
+        </footer>
+    </div>
+    
     <script>
         fetch('https://api.github.com/repos/dim-ghub/Gasket-Releases/releases')
             .then(r => r.json())
             .then(releases => {
                 const div = document.getElementById('releases');
+                if (!releases || releases.length === 0) {
+                    div.innerHTML = '<p style="text-align: center; color: #5c3d1e;">No releases available yet.</p>';
+                    return;
+                }
                 releases.forEach(rel => {
                     const el = document.createElement('div');
                     el.className = 'release';
                     const asset = rel.assets.find(a => a.name.endsWith('.AppImage'));
                     if (asset) {
-                        el.innerHTML = `<a href="${asset.browser_download_url}">${rel.name}</a><br><span class="date">${new Date(rel.published_at).toLocaleDateString()}</span>`;
+                        el.innerHTML = `<a href="${asset.browser_download_url}">${rel.name}</a><span class="date">Forged: ${new Date(rel.published_at).toLocaleDateString()}</span>`;
                         div.appendChild(el);
                     }
                 });
+            })
+            .catch(() => {
+                document.getElementById('releases').innerHTML = '<p style="text-align: center; color: #5c3d1e;">Failed to load releases. Check connection.</p>';
             });
     </script>
 </body>
