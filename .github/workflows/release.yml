@@ -1,0 +1,26 @@
+name: Release to GitHub
+
+on:
+  repository_dispatch:
+    types: [gasket-release]
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version tag'
+        required: true
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download AppImage from GitLab
+        run: |
+          curl -H "PRIVATE-TOKEN: ${{ secrets.GITLAB_TOKEN }}" \
+               "${{ secrets.GITLAB_PACKAGE_URL }}" -o appimage.tar.gz
+          
+      - name: Upload to GitHub
+        uses: softprops/action-gh-release@v1
+        with:
+          files: appimage.tar.gz
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
