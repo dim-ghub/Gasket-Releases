@@ -317,72 +317,7 @@
             text-decoration: none;
         }
 
-        .steamos-card {
-            background: var(--card-bg);
-            border: 1px solid var(--card-border);
-            border-radius: 12px;
-            padding: 24px;
-            box-shadow: 0 2px 8px var(--shadow);
-            margin-bottom: 40px;
-        }
-
-        .steamos-card h2 {
-            font-size: 1.1rem;
-            font-weight: 600;
-            margin-bottom: 16px;
-        }
-
-        .steamos-card p {
-            font-size: 0.9rem;
-            color: var(--text-secondary);
-            margin-bottom: 12px;
-        }
-
-        .steamos-card pre {
-            background: var(--bg-alt);
-            padding: 12px;
-            border-radius: 6px;
-            overflow-x: auto;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.85rem;
-            margin: 10px 0;
-        }
-
-        .steamos-card code {
-            background: var(--bg-alt);
-            padding: 2px 6px;
-            border-radius: 4px;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.85rem;
-        }
-
-        .copy-row {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            margin: 10px 0;
-        }
-
-        .copy-row pre {
-            flex: 1;
-            margin: 0;
-        }
-
-        .copy-btn {
-            background: var(--text);
-            color: var(--bg);
-            border: none;
-            padding: 8px 16px;
-            border-radius: 6px;
-            cursor: pointer;
-            font-weight: 500;
-            font-size: 0.85rem;
-        }
-
-        .copy-btn:hover {
-            opacity: 0.9;
-        }
-            .hero {
+        footer a {
                 grid-template-columns: 1fr;
             }
             header {
@@ -424,16 +359,6 @@
             </div>
         </div>
 
-        <div class="steamos-card">
-            <h2>SteamOS Installation</h2>
-            <p>On Steam Deck, open Konsole and run:</p>
-            <div class="copy-row">
-                <pre id="curl-command">curl -Ls https://raw.githubusercontent.com/dim-ghub/Gasket-Releases/main/steamos.sh | bash</pre>
-                <button class="copy-btn" onclick="copyCurl()">Copy</button>
-            </div>
-            <p>This will download the latest release, extract it to <code>~/.local/share/com.gasket.app</code>, and create a desktop entry. Find Gasket in your applications menu to launch.</p>
-        </div>
-
         <footer>
             <p>🄯 2026 Gasket · <a href="https://github.com/dim-ghub/Gasket-Releases">GitHub</a></p>
         </footer>
@@ -469,13 +394,6 @@
             });
 
         function copyCurl() {
-            const text = document.getElementById('curl-command').textContent;
-            navigator.clipboard.writeText(text).then(() => {
-                const btn = document.querySelector('.copy-btn');
-                btn.textContent = 'Copied!';
-                setTimeout(() => btn.textContent = 'Copy', 2000);
-            });
-        }
     </script>
 </body>
 </html>
