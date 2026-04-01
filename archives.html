@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gasket - Steam Deck Key Injector</title>
+    <title>Gasket - Archives</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400&display=swap');
 
@@ -51,7 +51,7 @@
         }
 
         .container {
-            max-width: 1100px;
+            max-width: 800px;
             margin: 0 auto;
             padding: 40px 20px;
         }
@@ -146,167 +146,85 @@
             color: var(--bg);
         }
 
-        .hero {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 30px;
-            margin-bottom: 40px;
+        .archives-header {
+            margin-bottom: 24px;
         }
 
-        .download-card {
-            background: var(--card-bg);
-            border: 1px solid var(--card-border);
-            border-radius: 12px;
-            padding: 30px;
+        .archives-header h2 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .archives-header p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .release-list {
             display: flex;
             flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            box-shadow: 0 2px 8px var(--shadow);
-            transition: all 0.2s ease;
+            gap: 12px;
         }
 
-        .download-card:hover {
-            box-shadow: 0 4px 16px var(--shadow-hover);
-            transform: translateY(-2px);
-        }
-
-        .version-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            background: var(--text);
-            color: var(--bg);
-            padding: 6px 12px;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            font-weight: 500;
-            margin-bottom: 16px;
-        }
-
-        .version-badge::before {
-            content: '●';
-            font-size: 8px;
-        }
-
-        .download-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            background: var(--text);
-            color: var(--bg);
-            padding: 14px 32px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 1rem;
-            transition: all 0.2s ease;
-            margin: 16px 0;
-        }
-
-        .download-btn:hover {
-            background: var(--accent-hover);
-            transform: scale(1.02);
-        }
-
-        .download-btn::before {
-            content: '↓';
-            font-size: 1.2rem;
-        }
-
-        .download-meta {
-            color: var(--text-secondary);
-            font-size: 0.85rem;
-        }
-
-        .changelog {
-            background: var(--card-bg);
-            border: 1px solid var(--card-border);
-            border-radius: 12px;
-            padding: 24px;
-            box-shadow: 0 2px 8px var(--shadow);
-        }
-
-        .changelog h2 {
-            font-size: 1.1rem;
-            font-weight: 600;
-            margin-bottom: 16px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .changelog h2::before {
-            content: '📋';
-        }
-
-        .changelog-content {
-            font-size: 0.9rem;
-            color: var(--text-secondary);
-            max-height: 300px;
-            overflow-y: auto;
-        }
-
-        .changelog-content a {
-            color: var(--accent);
-            text-decoration: none;
-        }
-
-        .changelog-content a:hover {
-            text-decoration: underline;
-        }
-
-        .changelog-content pre {
-            background: var(--bg-alt);
-            padding: 12px;
-            border-radius: 6px;
-            overflow-x: auto;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.8rem;
-            margin: 10px 0;
-        }
-
-        .features {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 16px;
-            margin-bottom: 40px;
-        }
-
-        .feature {
+        .release-item {
             background: var(--card-bg);
             border: 1px solid var(--card-border);
             border-radius: 12px;
             padding: 20px;
-            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: all 0.2s ease;
+            box-shadow: 0 2px 8px var(--shadow);
+        }
+
+        .release-item:hover {
+            box-shadow: 0 4px 16px var(--shadow-hover);
+            transform: translateY(-2px);
+            border-color: var(--accent);
+        }
+
+        .release-info {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .release-tag {
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        .release-date {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+        }
+
+        .release-download {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9rem;
+            padding: 8px 16px;
+            border-radius: 6px;
             transition: all 0.2s ease;
         }
 
-        .feature:hover {
-            border-color: var(--accent);
-            box-shadow: 0 2px 12px var(--shadow);
+        .release-download:hover {
+            background: var(--accent-light);
         }
 
-        .feature-icon {
-            font-size: 1.5rem;
-            margin-bottom: 8px;
-        }
-
-        .feature h3 {
-            font-size: 0.95rem;
-            font-weight: 600;
-            margin-bottom: 6px;
-        }
-
-        .feature p {
-            font-size: 0.85rem;
-            color: var(--text-secondary);
+        .release-download::before {
+            content: '↓';
         }
 
         footer {
             text-align: center;
-            padding-top: 30px;
+            padding-top: 40px;
             border-top: 1px solid var(--card-border);
             color: var(--text-secondary);
             font-size: 0.85rem;
@@ -321,17 +239,11 @@
             text-decoration: underline;
         }
 
-        @media (max-width: 768px) {
-            .hero {
-                grid-template-columns: 1fr;
-            }
-            header {
-                flex-direction: column;
-                text-align: center;
-            }
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: var(--text-secondary);
         }
-
-
     </style>
 </head>
 <body>
@@ -345,24 +257,16 @@
         </header>
 
         <nav class="nav">
-            <a href="#" class="active">Home</a>
-            <a href="archives.html">Archives</a>
+            <a href="index.html">Home</a>
+            <a href="archives.html" class="active">Archives</a>
         </nav>
 
-        <div class="hero">
-            <div class="download-card">
-                <span class="gear-accent top-left">⚙</span>
-                <span class="gear-accent bottom-right">⚙</span>
-                <span class="version-badge" id="version-badge"></span>
-                <a href="#" class="download-btn" id="download-btn">Download Latest</a>
-                <p class="download-meta" id="download-meta"></p>
-            </div>
-
-            <div class="changelog">
-                <h2>Release Notes</h2>
-                <div class="changelog-content" id="changelog"></div>
-            </div>
+        <div class="archives-header">
+            <h2>Release Archives</h2>
+            <p>All previous versions of Gasket</p>
         </div>
+
+        <div class="release-list" id="release-list"></div>
 
         <footer>
             <p>🄯 2026 Gasket · <a href="https://github.com/dim-ghub/Gasket-Releases">GitHub</a></p>
@@ -373,29 +277,36 @@
         fetch('https://api.github.com/repos/dim-ghub/Gasket-Releases/releases')
             .then(r => r.json())
             .then(releases => {
-                if (!releases || releases.length === 0) return;
-                
-                const latest = releases[0];
-                const asset = latest.assets.find(a => a.name.endsWith('.AppImage'));
-
-                document.getElementById('version-badge').textContent = latest.tag_name;
-                
-                if (asset) {
-                    document.getElementById('download-btn').href = asset.browser_download_url;
-                    const size = (asset.size / 1024 / 1024).toFixed(1);
-                    document.getElementById('download-meta').textContent = 
-                        `${asset.name} · ${size} MB`;
+                const list = document.getElementById('release-list');
+                if (!releases || releases.length === 0) {
+                    list.innerHTML = '<div class="empty-state">No releases available</div>';
+                    return;
                 }
 
-                const body = latest.body || 'No release notes available.';
-                document.getElementById('changelog').innerHTML = body
-                    .replace(/```(\w+)?\n([\s\S]*?)```/g, '<pre>$2</pre>')
-                    .replace(/`([^`]+)`/g, '<code>$1</code>')
-                    .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank">$1</a>')
-                    .replace(/\n/g, '<br>');
+                // Skip latest (show older releases)
+                const older = releases.slice(1);
+                
+                if (older.length === 0) {
+                    list.innerHTML = '<div class="empty-state">No previous releases available</div>';
+                    return;
+                }
+
+                older.forEach(rel => {
+                    const asset = rel.assets.find(a => a.name.endsWith('.AppImage'));
+                    const item = document.createElement('div');
+                    item.className = 'release-item';
+                    item.innerHTML = `
+                        <div class="release-info">
+                            <span class="release-tag">${rel.tag_name}</span>
+                            <span class="release-date">${new Date(rel.published_at).toLocaleDateString()}</span>
+                        </div>
+                        ${asset ? `<a href="${asset.browser_download_url}" class="release-download">Download</a>` : ''}
+                    `;
+                    list.appendChild(item);
+                });
             })
             .catch(() => {
-                document.getElementById('changelog').innerHTML = '<p>Failed to load release info.</p>';
+                document.getElementById('release-list').innerHTML = '<div class="empty-state">Failed to load releases</div>';
             });
     </script>
 </body>
