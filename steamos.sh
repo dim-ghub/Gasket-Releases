@@ -4,7 +4,7 @@ set -eu
 INSTALL_DIR="$HOME/.local/share/com.gasket.app"
 DESKTOP_DIR="$HOME/.local/share/applications"
 ICON_DIR="$HOME/.local/share/icons/hicolor/256x256/apps"
-DOWNLOAD_URL="https://github.com/anomalyco/gasket/releases/latest/download/Gasket.AppImage"
+DOWNLOAD_URL="https://github.com/dim-ghub/Gasket-Releases/releases/latest/download/Gasket.AppImage"
 
 mkdir -p "$INSTALL_DIR"
 rm -rf "$INSTALL_DIR/squashfs-root"
