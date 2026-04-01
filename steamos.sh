@@ -12,7 +12,7 @@ rm -rf "$INSTALL_DIR/squashfs-root"
 if command -v wget &>/dev/null; then
 	wget -q "$DOWNLOAD_URL" -O "$INSTALL_DIR/Gasket.AppImage"
 else
-	curl -L "$DOWNLOAD_URL" -o "$INSTALL_DIR/Gasket.AppImage"
+	curl -sL "$DOWNLOAD_URL" -o "$INSTALL_DIR/Gasket.AppImage"
 fi
 
 chmod +x "$INSTALL_DIR/Gasket.AppImage"
