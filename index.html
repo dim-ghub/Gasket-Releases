@@ -355,6 +355,33 @@
             font-family: 'JetBrains Mono', monospace;
             font-size: 0.85rem;
         }
+
+        .copy-row {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin: 10px 0;
+        }
+
+        .copy-row pre {
+            flex: 1;
+            margin: 0;
+        }
+
+        .copy-btn {
+            background: var(--text);
+            color: var(--bg);
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 500;
+            font-size: 0.85rem;
+        }
+
+        .copy-btn:hover {
+            opacity: 0.9;
+        }
             .hero {
                 grid-template-columns: 1fr;
             }
@@ -400,7 +427,10 @@
         <div class="steamos-card">
             <h2>SteamOS Installation</h2>
             <p>On Steam Deck, open Konsole and run:</p>
-            <pre>curl -s https://raw.githubusercontent.com/dim-ghub/Gasket-Releases/main/steamos.sh | bash</pre>
+            <div class="copy-row">
+                <pre id="curl-command">curl -s https://raw.githubusercontent.com/dim-ghub/Gasket-Releases/main/steamos.sh | bash</pre>
+                <button class="copy-btn" onclick="copyCurl()">Copy</button>
+            </div>
             <p>This will download and extract Gasket to <code>~/Gasket-Releases</code>. Run <code>~/Gasket-Releases/squashfs-root/bin/run.sh</code> to launch.</p>
         </div>
 
@@ -437,6 +467,15 @@
             .catch(() => {
                 document.getElementById('changelog').innerHTML = '<p>Failed to load release info.</p>';
             });
+
+        function copyCurl() {
+            const text = document.getElementById('curl-command').textContent;
+            navigator.clipboard.writeText(text).then(() => {
+                const btn = document.querySelector('.copy-btn');
+                btn.textContent = 'Copied!';
+                setTimeout(() => btn.textContent = 'Copy', 2000);
+            });
+        }
     </script>
 </body>
 </html>
