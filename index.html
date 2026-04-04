@@ -50,15 +50,29 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 120vmax;
-            height: 120vmax;
-            opacity: 0.4;
-            animation: rotate-bg 120s linear infinite;
+            width: 100vmax;
+            height: 100vmax;
+            opacity: 0.5;
         }
 
-        @keyframes rotate-bg {
-            from { transform: translate(-50%, -50%) rotate(0deg); }
-            to { transform: translate(-50%, -50%) rotate(360deg); }
+        .ring-layer {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border: 1px solid var(--ring-color);
+            border-radius: 50%;
+            animation: pulse-ring 8s ease-in-out infinite;
+        }
+
+        .ring-layer:nth-child(1) { width: 300px; height: 300px; animation-delay: 0s; }
+        .ring-layer:nth-child(2) { width: 500px; height: 500px; animation-delay: -2s; }
+        .ring-layer:nth-child(3) { width: 700px; height: 700px; animation-delay: -4s; }
+        .ring-layer:nth-child(4) { width: 900px; height: 900px; animation-delay: -6s; }
+
+        @keyframes pulse-ring {
+            0%, 100% { opacity: 0.2; transform: translate(-50%, -50%) scale(1); }
+            50% { opacity: 0.4; transform: translate(-50%, -50%) scale(1.02); }
         }
 
         .star {
@@ -340,6 +354,10 @@
     <!-- Animated Background -->
     <div class="bg-container">
         <img src="bg-pattern.svg" class="bg-pattern" alt="">
+        <div class="ring-layer"></div>
+        <div class="ring-layer"></div>
+        <div class="ring-layer"></div>
+        <div class="ring-layer"></div>
     </div>
 
     <div class="container">
@@ -407,8 +425,8 @@
                 <a href="https://github.com/dim-ghub/Gasket-Releases/issues" target="_blank" class="btn-help">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <circle cx="12" cy="12" r="10"/>
-                        <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/>
-                        <line x1="12" y1="17" x2="12.01" y2="17"/>
+                        <path d="M9 9c0-1.1.9-2 2-2s2 .9 2 2c0 1.1-.9 2-2 2"/>
+                        <path d="M12 17h.01"/>
                     </svg>
                     Open Issue
                 </a>
