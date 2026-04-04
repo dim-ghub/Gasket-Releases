@@ -5,36 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gasket - Archives</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap');
 
         :root {
-            --bg: #fafafa;
-            --bg-alt: #f6f5f4;
-            --card-bg: #ffffff;
-            --card-border: #deddda;
-            --text: #2e3436;
-            --text-secondary: #5e5c64;
-            --accent: #2e3436;
-            --accent-hover: #000000;
-            --accent-light: #e8e8e8;
-            --shadow: rgba(0,0,0,0.08);
-            --shadow-hover: rgba(0,0,0,0.12);
-        }
-
-        @media (prefers-color-scheme: dark) {
-            :root {
-                --bg: #1a1a1a;
-                --bg-alt: #252525;
-                --card-bg: #2a2a2a;
-                --card-border: #3a3a3a;
-                --text: #ffffff;
-                --text-secondary: #888888;
-                --accent: #ffffff;
-                --accent-hover: #dddddd;
-                --accent-light: #333333;
-                --shadow: rgba(0,0,0,0.4);
-                --shadow-hover: rgba(0,0,0,0.5);
-            }
+            --primary: #0a0a0a;
+            --primary-light: #1a1a1a;
+            --accent: #e8e8e8;
+            --accent-dim: #888888;
+            --ring-color: #2a2a2a;
+            --text: #e8e8e8;
+            --text-secondary: #888888;
+            --shadow: rgba(0,0,0,0.5);
         }
 
         * {
@@ -44,16 +25,76 @@
         }
 
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: #1a1a1a;
+            font-family: 'JetBrains Mono', 'Courier New', monospace;
+            background: var(--primary);
             color: var(--text);
-            line-height: 1.5;
+            line-height: 1.6;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .bg-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .bg-ring {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border: 1px solid var(--ring-color);
+            border-radius: 50%;
+            animation: pulse-ring 8s ease-in-out infinite;
+        }
+
+        .bg-ring:nth-child(1) { width: 300px; height: 300px; animation-delay: 0s; }
+        .bg-ring:nth-child(2) { width: 500px; height: 500px; animation-delay: -2s; }
+        .bg-ring:nth-child(3) { width: 700px; height: 700px; animation-delay: -4s; }
+        .bg-ring:nth-child(4) { width: 900px; height: 900px; animation-delay: -6s; }
+
+        @keyframes pulse-ring {
+            0%, 100% { opacity: 0.3; transform: translate(-50%, -50%) scale(1); }
+            50% { opacity: 0.6; transform: translate(-50%, -50%) scale(1.02); }
+        }
+
+        .gear-bg {
+            position: absolute;
+            opacity: 0.1;
+            animation: rotate-gear 60s linear infinite;
+        }
+
+        .gear-bg.gear-1 {
+            top: 10%;
+            right: 5%;
+            width: 200px;
+            height: 200px;
+        }
+
+        .gear-bg.gear-2 {
+            bottom: 15%;
+            left: 3%;
+            width: 150px;
+            height: 150px;
+            animation-direction: reverse;
+            animation-duration: 45s;
+        }
+
+        @keyframes rotate-gear {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
         }
 
         .container {
             max-width: 800px;
             margin: 0 auto;
-            padding: 40px 20px;
+            padding: 60px 24px;
+            position: relative;
         }
 
         header {
@@ -62,7 +103,7 @@
             gap: 20px;
             margin-bottom: 40px;
             padding-bottom: 30px;
-            border-bottom: 1px solid var(--card-border);
+            border-bottom: 1px solid var(--ring-color);
         }
 
         .logo {
@@ -73,14 +114,15 @@
             justify-content: center;
             border-radius: 16px;
             position: relative;
-            background: var(--bg-alt);
+            background: var(--primary-light);
+            border: 1px solid var(--ring-color);
+            box-shadow: 0 4px 20px var(--shadow);
         }
 
         .logo img {
-            width: 48px;
-            height: 48px;
-            border-radius: 10px;
-            transition: transform 0.5s ease;
+            width: 40px;
+            height: 40px;
+            transition: transform 1s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
 
         .logo:hover img {
@@ -90,70 +132,68 @@
         .logo::after {
             content: '';
             position: absolute;
-            width: 8px;
-            height: 8px;
-            background: var(--text-secondary);
-            border-radius: 50%;
-            bottom: 8px;
-            right: 8px;
-            opacity: 0.4;
+            width: 100%;
+            height: 100%;
+            border: 1px solid var(--ring-color);
+            border-radius: 16px;
+            animation: pulse-ring 4s ease-in-out infinite;
         }
-
-        .gear-accent {
-            position: absolute;
-            font-size: 14px;
-            color: var(--text-secondary);
-            opacity: 0.5;
-        }
-
-        .gear-accent.top-left { top: 8px; left: 8px; }
-        .gear-accent.bottom-right { bottom: 8px; right: 8px; transform: rotate(180deg); }
 
         header h1 {
             font-size: 1.75rem;
             font-weight: 600;
-            letter-spacing: -0.5px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
         }
 
         .subtitle {
             color: var(--text-secondary);
-            font-size: 0.95rem;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
         }
 
         .nav {
             display: flex;
             gap: 8px;
             margin-bottom: 30px;
+            border-bottom: 1px solid var(--ring-color);
+            padding-bottom: 16px;
         }
 
         .nav a {
-            padding: 8px 16px;
+            padding: 10px 20px;
             border-radius: 8px;
             text-decoration: none;
             color: var(--text-secondary);
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             font-weight: 500;
-            transition: all 0.2s ease;
+            transition: all 0.3s;
+            background: transparent;
+            border: 1px solid transparent;
         }
 
         .nav a:hover {
-            background: var(--bg-alt);
             color: var(--text);
+            background: var(--primary-light);
+            border-color: var(--ring-color);
         }
 
         .nav a.active {
-            background: var(--text);
-            color: var(--bg);
+            color: var(--primary);
+            background: var(--accent);
+            border-color: var(--accent);
         }
 
         .archives-header {
-            margin-bottom: 24px;
+            margin-bottom: 32px;
         }
 
         .archives-header h2 {
-            font-size: 1.25rem;
+            font-size: 1.2rem;
             font-weight: 600;
             margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         .archives-header p {
@@ -168,21 +208,21 @@
         }
 
         .release-item {
-            background: var(--card-bg);
-            border: 1px solid var(--card-border);
+            background: rgba(26, 26, 26, 0.8);
+            border: 1px solid var(--ring-color);
             border-radius: 12px;
             padding: 20px;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            transition: all 0.2s ease;
-            box-shadow: 0 2px 8px var(--shadow);
+            transition: all 0.3s;
+            backdrop-filter: blur(10px);
         }
 
         .release-item:hover {
-            box-shadow: 0 4px 16px var(--shadow-hover);
             transform: translateY(-2px);
-            border-color: var(--accent);
+            border-color: var(--accent-dim);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.3);
         }
 
         .release-info {
@@ -194,65 +234,104 @@
         .release-tag {
             font-weight: 600;
             font-size: 1rem;
+            letter-spacing: 1px;
         }
 
         .release-date {
             color: var(--text-secondary);
-            font-size: 0.85rem;
+            font-size: 0.8rem;
         }
 
         .release-download {
             display: flex;
             align-items: center;
             gap: 8px;
-            color: var(--accent);
+            color: var(--text);
             text-decoration: none;
             font-weight: 500;
-            font-size: 0.9rem;
-            padding: 8px 16px;
-            border-radius: 6px;
-            transition: all 0.2s ease;
+            font-size: 0.85rem;
+            padding: 10px 20px;
+            border-radius: 8px;
+            transition: all 0.3s;
+            border: 1px solid var(--ring-color);
+            background: rgba(26, 26, 26, 0.6);
         }
 
         .release-download:hover {
-            background: var(--accent-light);
+            background: var(--primary-light);
+            border-color: var(--text-secondary);
+            transform: translateY(-2px);
         }
 
         .release-download::before {
             content: '↓';
+            font-size: 1rem;
         }
 
         footer {
             text-align: center;
             padding-top: 40px;
-            border-top: 1px solid var(--card-border);
+            border-top: 1px solid var(--ring-color);
             color: var(--text-secondary);
-            font-size: 0.85rem;
+            font-size: 0.8rem;
         }
 
         footer a {
-            color: var(--accent);
+            color: inherit;
             text-decoration: none;
+            font-weight: 500;
         }
 
         footer a:hover {
-            text-decoration: underline;
+            color: var(--text);
         }
 
         .empty-state {
             text-align: center;
             padding: 60px 20px;
             color: var(--text-secondary);
+            background: rgba(26, 26, 26, 0.4);
+            border-radius: 12px;
+            border: 1px solid var(--ring-color);
+        }
+
+        @media (max-width: 768px) {
+            .container { padding-top: 40px; }
+            .bg-ring { display: none; }
         }
     </style>
 </head>
 <body>
+    <div class="bg-container">
+        <div class="bg-ring"></div>
+        <div class="bg-ring"></div>
+        <div class="bg-ring"></div>
+        <div class="bg-ring"></div>
+        
+        <svg class="gear-bg gear-1" viewBox="0 0 100 100">
+            <g fill="none" stroke="currentColor" stroke-width="3">
+                <circle cx="50" cy="50" r="30"/>
+                <circle cx="50" cy="50" r="20"/>
+                <circle cx="50" cy="50" r="10"/>
+            </g>
+        </svg>
+        <svg class="gear-bg gear-2" viewBox="0 0 100 100">
+            <g fill="none" stroke="currentColor" stroke-width="3">
+                <circle cx="50" cy="50" r="25"/>
+                <circle cx="50" cy="50" r="15"/>
+                <circle cx="50" cy="50" r="8"/>
+            </g>
+        </svg>
+    </div>
+
     <div class="container">
         <header>
-            <div class="logo"><img src="com.gasket.app.svg" alt="Gasket"></div>
+            <div class="logo">
+                <img src="com.gasket.app.svg" alt="Gasket">
+            </div>
             <div>
                 <h1>Gasket</h1>
-                <p class="subtitle">Steam Deck Key Injection</p>
+                <p class="subtitle">Steam Key Injector</p>
             </div>
         </header>
 
@@ -269,7 +348,7 @@
         <div class="release-list" id="release-list"></div>
 
         <footer>
-            <p>🄯 2026 Gasket · <a href="https://github.com/dim-ghub/Gasket-Releases">GitHub</a></p>
+            <p>2026 Gasket Project · <a href="https://github.com/dim-ghub/Gasket-Releases">GitHub</a></p>
         </footer>
     </div>
 
@@ -283,7 +362,6 @@
                     return;
                 }
 
-                // Skip latest (show older releases)
                 const older = releases.slice(1);
                 
                 if (older.length === 0) {
