@@ -50,29 +50,66 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 100vmax;
-            height: 100vmax;
-            opacity: 0.5;
+            width: 80vmax;
+            height: 80vmax;
+            opacity: 0.3;
+            animation: rotate-bg 120s linear infinite;
         }
 
-        .ring-layer {
+        @keyframes rotate-bg {
+            from { transform: translate(-50%, -50%) rotate(0deg); }
+            to { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+
+        .ring-set {
             position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            border: 1px solid var(--ring-color);
-            border-radius: 50%;
             animation: pulse-ring 8s ease-in-out infinite;
         }
 
-        .ring-layer:nth-child(1) { width: 300px; height: 300px; animation-delay: 0s; }
-        .ring-layer:nth-child(2) { width: 500px; height: 500px; animation-delay: -2s; }
-        .ring-layer:nth-child(3) { width: 700px; height: 700px; animation-delay: -4s; }
-        .ring-layer:nth-child(4) { width: 900px; height: 900px; animation-delay: -6s; }
+        .ring-set-1 {
+            top: 20%;
+            left: 10%;
+            width: 250px;
+            height: 250px;
+            animation: spin-cw 40s linear infinite, pulse-ring 6s ease-in-out infinite;
+        }
+
+        .ring-set-2 {
+            bottom: 15%;
+            right: 5%;
+            width: 300px;
+            height: 300px;
+            animation: spin-ccw 60s linear infinite, pulse-ring 8s ease-in-out infinite;
+            animation-delay: -3s;
+        }
+
+        .ring-set-3 {
+            top: 60%;
+            left: 60%;
+            width: 200px;
+            height: 200px;
+            animation: spin-cw 35s linear infinite, pulse-ring 5s ease-in-out infinite;
+            animation-delay: -5s;
+        }
+
+        @keyframes spin-cw {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        @keyframes spin-ccw {
+            from { transform: rotate(360deg); }
+            to { transform: rotate(0deg); }
+        }
 
         @keyframes pulse-ring {
-            0%, 100% { opacity: 0.2; transform: translate(-50%, -50%) scale(1); }
-            50% { opacity: 0.4; transform: translate(-50%, -50%) scale(1.02); }
+            0%, 100% { opacity: 0.2; }
+            50% { opacity: 0.5; }
+        }
+
+        .ring-set img {
+            width: 100%;
+            height: 100%;
         }
 
         .star {
@@ -338,6 +375,14 @@
             background: var(--primary-light);
         }
 
+        .btn-help img {
+            filter: invert(1) opacity(0.7);
+        }
+
+        .btn-help:hover img {
+            filter: invert(1) opacity(1);
+        }
+
         footer {
             border-top: 1px solid var(--ring-color);
             padding-top: 24px;
@@ -348,16 +393,30 @@
 
         footer a { color: inherit; text-decoration: none; font-weight: 500; }
         footer a:hover { color: var(--text); }
+
+        @media (max-width: 768px) {
+            .main-grid { grid-template-columns: 1fr; }
+            header { flex-direction: column; text-align: center; }
+            .container { padding-top: 40px; }
+            .bg-pattern { width: 60vmax; height: 60vmax; opacity: 0.2; }
+            .ring-set { display: none; }
+        }
     </style>
 </head>
 <body>
     <!-- Animated Background -->
     <div class="bg-container">
         <img src="bg-pattern.svg" class="bg-pattern" alt="">
-        <div class="ring-layer"></div>
-        <div class="ring-layer"></div>
-        <div class="ring-layer"></div>
-        <div class="ring-layer"></div>
+        
+        <div class="ring-set ring-set-1">
+            <img src="bg-pattern.svg" alt="">
+        </div>
+        <div class="ring-set ring-set-2">
+            <img src="bg-pattern.svg" alt="">
+        </div>
+        <div class="ring-set ring-set-3">
+            <img src="bg-pattern.svg" alt="">
+        </div>
     </div>
 
     <div class="container">
@@ -423,11 +482,7 @@
                     Join Matrix
                 </a>
                 <a href="https://github.com/dim-ghub/Gasket-Releases/issues" target="_blank" class="btn-help">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <circle cx="12" cy="12" r="10"/>
-                        <path d="M9 9c0-1.1.9-2 2-2s2 .9 2 2c0 1.1-.9 2-2 2"/>
-                        <path d="M12 17h.01"/>
-                    </svg>
+                    <img src="help.svg" alt="" style="width:16px;height:16px;">
                     Open Issue
                 </a>
             </div>
