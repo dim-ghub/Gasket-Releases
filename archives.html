@@ -41,53 +41,74 @@
             height: 100%;
             z-index: -1;
             overflow: hidden;
+            pointer-events: none;
         }
 
-        .bg-ring {
+        .bg-pattern {
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            border: 1px solid var(--ring-color);
-            border-radius: 50%;
+            width: 40vmax;
+            height: 40vmax;
+            opacity: 0.3;
+            animation: rotate-bg 120s linear infinite;
+        }
+
+        @keyframes rotate-bg {
+            from { transform: translate(-50%, -50%) rotate(0deg); }
+            to { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+
+        .ring-set {
+            position: absolute;
             animation: pulse-ring 8s ease-in-out infinite;
         }
 
-        .bg-ring:nth-child(1) { width: 300px; height: 300px; animation-delay: 0s; }
-        .bg-ring:nth-child(2) { width: 500px; height: 500px; animation-delay: -2s; }
-        .bg-ring:nth-child(3) { width: 700px; height: 700px; animation-delay: -4s; }
-        .bg-ring:nth-child(4) { width: 900px; height: 900px; animation-delay: -6s; }
-
-        @keyframes pulse-ring {
-            0%, 100% { opacity: 0.3; transform: translate(-50%, -50%) scale(1); }
-            50% { opacity: 0.6; transform: translate(-50%, -50%) scale(1.02); }
+        .ring-set-1 {
+            top: 8%;
+            left: 8%;
+            width: 180px;
+            height: 180px;
+            animation: spin-cw 40s linear infinite, pulse-ring 6s ease-in-out infinite;
         }
 
-        .gear-bg {
-            position: absolute;
-            opacity: 0.1;
-            animation: rotate-gear 60s linear infinite;
+        .ring-set-2 {
+            bottom: 10%;
+            right: 10%;
+            width: 160px;
+            height: 160px;
+            animation: spin-ccw 60s linear infinite, pulse-ring 8s ease-in-out infinite;
+            animation-delay: -3s;
         }
 
-        .gear-bg.gear-1 {
-            top: 10%;
-            right: 5%;
-            width: 200px;
-            height: 200px;
+        .ring-set-3 {
+            top: 30%;
+            left: 70%;
+            width: 120px;
+            height: 120px;
+            animation: spin-cw 35s linear infinite, pulse-ring 5s ease-in-out infinite;
+            animation-delay: -5s;
         }
 
-        .gear-bg.gear-2 {
-            bottom: 15%;
-            left: 3%;
-            width: 150px;
-            height: 150px;
-            animation-direction: reverse;
-            animation-duration: 45s;
-        }
-
-        @keyframes rotate-gear {
+        @keyframes spin-cw {
             from { transform: rotate(0deg); }
             to { transform: rotate(360deg); }
+        }
+
+        @keyframes spin-ccw {
+            from { transform: rotate(360deg); }
+            to { transform: rotate(0deg); }
+        }
+
+        @keyframes pulse-ring {
+            0%, 100% { opacity: 0.2; }
+            50% { opacity: 0.5; }
+        }
+
+        .ring-set img {
+            width: 100%;
+            height: 100%;
         }
 
         .container {
@@ -297,31 +318,24 @@
 
         @media (max-width: 768px) {
             .container { padding-top: 40px; }
-            .bg-ring { display: none; }
+            .bg-pattern { width: 60vmax; height: 60vmax; opacity: 0.2; }
+            .ring-set { display: none; }
         }
     </style>
 </head>
 <body>
     <div class="bg-container">
-        <div class="bg-ring"></div>
-        <div class="bg-ring"></div>
-        <div class="bg-ring"></div>
-        <div class="bg-ring"></div>
+        <img src="bg-pattern.svg" class="bg-pattern" alt="">
         
-        <svg class="gear-bg gear-1" viewBox="0 0 100 100">
-            <g fill="none" stroke="currentColor" stroke-width="3">
-                <circle cx="50" cy="50" r="30"/>
-                <circle cx="50" cy="50" r="20"/>
-                <circle cx="50" cy="50" r="10"/>
-            </g>
-        </svg>
-        <svg class="gear-bg gear-2" viewBox="0 0 100 100">
-            <g fill="none" stroke="currentColor" stroke-width="3">
-                <circle cx="50" cy="50" r="25"/>
-                <circle cx="50" cy="50" r="15"/>
-                <circle cx="50" cy="50" r="8"/>
-            </g>
-        </svg>
+        <div class="ring-set ring-set-1">
+            <img src="bg-pattern.svg" alt="">
+        </div>
+        <div class="ring-set ring-set-2">
+            <img src="bg-pattern.svg" alt="">
+        </div>
+        <div class="ring-set ring-set-3">
+            <img src="bg-pattern.svg" alt="">
+        </div>
     </div>
 
     <div class="container">
