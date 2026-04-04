@@ -180,18 +180,24 @@
             color: var(--text-secondary);
         }
 
+        .changelog {
+            display: flex;
+            flex-direction: column;
+        }
+
         .changelog h2 {
             font-size: 1.2rem;
             margin-bottom: 16px;
             display: flex;
             align-items: center;
             gap: 8px;
+            flex-shrink: 0;
         }
 
         .changelog-content {
             font-size: 0.9rem;
             color: var(--text-secondary);
-            max-height: 280px;
+            max-height: 100px;
             overflow-y: auto;
             padding-right: 10px;
         }
@@ -306,11 +312,6 @@
                     Fetching latest changes...
                 </div>
             </div>
-        </div>
-
-        <div class="info-bar">
-            <h3>⚠️ SteamOS Support Note</h3>
-            <p>Gasket is an AppImage and requires libraries not present on SteamOS by default. We recommend <a href="https://cachyos.org/download/" target="_blank">CachyOS Handheld</a> for the same SteamOS look and feel but with more user freedom and up-to-date packages.</p>
         </div>
 
         <div class="help-section">
