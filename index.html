@@ -42,53 +42,23 @@
             height: 100%;
             z-index: -1;
             overflow: hidden;
+            pointer-events: none;
         }
 
-        .bg-ring {
+        .bg-pattern {
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            border: 1px solid var(--ring-color);
-            border-radius: 50%;
-            animation: pulse-ring 8s ease-in-out infinite;
+            width: 120vmax;
+            height: 120vmax;
+            opacity: 0.4;
+            animation: rotate-bg 120s linear infinite;
         }
 
-        .bg-ring:nth-child(1) { width: 300px; height: 300px; animation-delay: 0s; }
-        .bg-ring:nth-child(2) { width: 500px; height: 500px; animation-delay: -2s; }
-        .bg-ring:nth-child(3) { width: 700px; height: 700px; animation-delay: -4s; }
-        .bg-ring:nth-child(4) { width: 900px; height: 900px; animation-delay: -6s; }
-
-        @keyframes pulse-ring {
-            0%, 100% { opacity: 0.3; transform: translate(-50%, -50%) scale(1); }
-            50% { opacity: 0.6; transform: translate(-50%, -50%) scale(1.02); }
-        }
-
-        .gear-bg {
-            position: absolute;
-            opacity: 0.15;
-            animation: rotate-gear 60s linear infinite;
-        }
-
-        .gear-bg.gear-1 {
-            top: 10%;
-            right: 5%;
-            width: 200px;
-            height: 200px;
-        }
-
-        .gear-bg.gear-2 {
-            bottom: 15%;
-            left: 3%;
-            width: 150px;
-            height: 150px;
-            animation-direction: reverse;
-            animation-duration: 45s;
-        }
-
-        @keyframes rotate-gear {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
+        @keyframes rotate-bg {
+            from { transform: translate(-50%, -50%) rotate(0deg); }
+            to { transform: translate(-50%, -50%) rotate(360deg); }
         }
 
         .star {
@@ -364,59 +334,12 @@
 
         footer a { color: inherit; text-decoration: none; font-weight: 500; }
         footer a:hover { color: var(--text); }
-
-        .gear-icon {
-            width: 18px;
-            height: 18px;
-            animation: spin 2s linear infinite;
-        }
-
-        @keyframes spin {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-
-        @media (max-width: 768px) {
-            .main-grid { grid-template-columns: 1fr; }
-            header { flex-direction: column; text-align: center; }
-            .container { padding-top: 40px; }
-            .bg-ring { display: none; }
-        }
     </style>
 </head>
 <body>
     <!-- Animated Background -->
     <div class="bg-container">
-        <div class="bg-ring"></div>
-        <div class="bg-ring"></div>
-        <div class="bg-ring"></div>
-        <div class="bg-ring"></div>
-        
-        <!-- SVG Gear Backgrounds -->
-        <svg class="gear-bg gear-1" viewBox="0 0 100 100">
-            <g fill="none" stroke="currentColor" stroke-width="3">
-                <circle cx="50" cy="50" r="30"/>
-                <circle cx="50" cy="50" r="20"/>
-                <circle cx="50" cy="50" r="10"/>
-            </g>
-        </svg>
-        <svg class="gear-bg gear-2" viewBox="0 0 100 100">
-            <g fill="none" stroke="currentColor" stroke-width="3">
-                <circle cx="50" cy="50" r="25"/>
-                <circle cx="50" cy="50" r="15"/>
-                <circle cx="50" cy="50" r="8"/>
-            </g>
-        </svg>
-
-        <!-- Stars -->
-        <div class="star"></div>
-        <div class="star"></div>
-        <div class="star"></div>
-        <div class="star"></div>
-        <div class="star"></div>
-        <div class="star"></div>
-        <div class="star"></div>
-        <div class="star"></div>
+        <img src="bg-pattern.svg" class="bg-pattern" alt="">
     </div>
 
     <div class="container">
@@ -437,14 +360,7 @@
 
         <div class="main-grid">
             <div class="card download-section">
-                <div class="version-tag" id="version-tag">
-                    <svg class="gear-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <circle cx="12" cy="12" r="10"/>
-                        <circle cx="12" cy="12" r="6"/>
-                        <circle cx="12" cy="12" r="2"/>
-                    </svg>
-                    <span style="margin-left: 8px;">Loading...</span>
-                </div>
+                <div class="version-tag" id="version-tag">Loading...</div>
                 <a href="https://github.com/dim-ghub/Gasket-Releases/releases/latest" class="btn-primary" id="main-download-btn">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
@@ -474,16 +390,17 @@
 
         <div class="info-bar">
             <h3>Notice</h3>
-            <p>Gasket requires an internet connection and valid API key. Keys are available via <a href="#">Beeper subscription</a>. For support, join our Matrix space or open a GitHub issue.</p>
+            <p>While no users have reported issues, we are not responsible for any moderation actions taken against your Steam&trade; account.</p>
         </div>
 
         <div class="help-section">
             <h3>Need help?</h3>
             <div class="help-buttons">
                 <a href="https://matrix.to/#/#gasket-support:beeper.com" target="_blank" class="btn-help">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M21 13v-2a4 4 0 0 0-4-4H7a4 4 0 0 0-4 4v2"/>
-                        <circle cx="12" cy="12" r="4"/>
+                    <svg width="16" height="16" viewBox="0 0 27.9 32" fill="currentColor">
+                        <path d="m27.1 31.2v-30.5h-2.19v-0.732h3.04v32h-3.04v-0.732z"/>
+                        <path d="m8.23 10.4v1.54h0.044c0.385-0.564 0.893-1.03 1.49-1.37 0.58-0.323 1.25-0.485 1.99-0.485 0.72 0 1.38 0.14 1.97 0.42 0.595 0.279 1.05 0.771 1.36 1.48 0.338-0.5 0.796-0.941 1.38-1.32 0.58-0.383 1.27-0.574 2.06-0.574 0.602 0 1.16 0.074 1.67 0.22 0.514 0.148 0.954 0.383 1.32 0.707 0.366 0.323 0.653 0.746 0.859 1.27 0.205 0.522 0.308 1.15 0.308 1.89v7.63h-3.13v-6.46c0-0.383-0.015-0.743-0.044-1.08-0.0209-0.307-0.103-0.607-0.242-0.882-0.133-0.251-0.336-0.458-0.584-0.596-0.257-0.146-0.606-0.22-1.05-0.22-0.44 0-0.796 0.085-1.07 0.253-0.272 0.17-0.485 0.39-0.639 0.662-0.159 0.287-0.264 0.602-0.308 0.927-0.052 0.347-0.078 0.697-0.078 1.05v6.35h-3.13v-6.4c0-0.338-7e-3 -0.673-0.021-1-0.0114-0.314-0.0749-0.623-0.188-0.916-0.108-0.277-0.3-0.512-0.55-0.673-0.258-0.168-0.636-0.253-1.14-0.253-0.198 0.0083-0.394 0.042-0.584 0.1-0.258 0.0745-0.498 0.202-0.705 0.374-0.228 0.184-0.422 0.449-0.584 0.794-0.161 0.346-0.242 0.798-0.242 1.36v6.62h-3.13v-11.4z"/>
+                        <path d="m0.936 0.732v30.5h2.19v0.732h-3.04v-32h3.03v0.732z"/>
                     </svg>
                     Join Matrix
                 </a>
@@ -514,14 +431,7 @@
                     const latest = releases[0];
                     const appImage = latest.assets.find(a => a.name.endsWith('.AppImage'));
 
-                    document.getElementById('version-tag').innerHTML = `
-                        <svg class="gear-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <circle cx="12" cy="12" r="10"/>
-                            <circle cx="12" cy="12" r="6"/>
-                            <circle cx="12" cy="12" r="2"/>
-                        </svg>
-                        <span style="margin-left: 8px;">${latest.tag_name}</span>
-                    `;
+                    document.getElementById('version-tag').textContent = latest.tag_name;
                     
                     if (appImage) {
                         document.getElementById('main-download-btn').href = appImage.browser_download_url;
@@ -541,9 +451,7 @@
                 }
             } catch (error) {
                 console.error("Failed to load releases:", error);
-                document.getElementById('version-tag').innerHTML = `
-                    <span>v1.0.0-latest</span>
-                `;
+                document.getElementById('version-tag').textContent = "v1.0.0-latest";
                 document.getElementById('download-info').textContent = "Check GitHub for .AppImage assets.";
                 document.getElementById('changelog-body').textContent = "Could not fetch release notes.";
             }
